@@ -48,14 +48,14 @@ $i++;
 
 @else 
 
-<input type="text" name="name" value = "{{$arradata['name']}}"><br>
+<input type="text" name="name" value = "{{$arrdata['name']}}"><br>
 Сорт:
-<input type="text" name="sort" value = "{{$arradata['sort']}}"><br>
+<input type="text" name="sort" value = "{{$arrdata['sort']}}"><br>
 Цвет:
-<input type="text" name="color" value = "{{$arradata['color']}}"><br>
-Цена:<div class="price">
-<input type="text" name="price" value = "{{$arradata['price']}}">
-Валюта: <select name="curency" class="selectdiv" >
+<input type="text" name="color" value = "{{$arrdata['color']}}"><br>
+Цена:<br/><div class="price">
+<input type="text" name="price" value = "{{$arrdata['price']}}">
+<select name="curency" class="selectdiv" >
     @if($arrdata['curency'] == 'ГРН')
       <option value="$arrdata['curency']" selected>&#8372;</option>
       @else <option value="{{ $arrdata['curency'] }}">&#8372;</option>
@@ -64,17 +64,17 @@ $i++;
       <option value="{{ $arrdata['curency'] }}" selected>&#36;</option>
       @else <option value="{{ $arrdata['curency'] }}">&#36;</option>
      @endif 
-    @if($product->curency == 'EURO')
+    @if($arrdata['curency'] == 'EURO')
       <option value="{{ $arrdata['curency'] }}" selected>&euro;</option>
       @else <option value="{{ $arrdata['curency'] }}">&euro;</option>
      @endif
 </select></div><br>
 <br>
 Производитель:
-<input type="text" name="manufacturer" value = "{{$arradata['manufacturer']}}"><br>
+<input type="text" name="manufacturer" value = "{{$arrdata['manufacturer']}}"><br>
 Описание:
 <textarea id = "editor" cols = "70" rows = "10" class="mytest"
-          name="description" value = "{{$arradata['description']}}"></textarea><br>
+          name="description" value = "{{$arrdata['description']}}"></textarea><br>
 Категория: 
 <select name="category"class="selectdiv"  >
 @foreach($categories as $category)

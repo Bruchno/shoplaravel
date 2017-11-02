@@ -38,15 +38,17 @@ class ProductController extends Controller
         public function destroy($id)
         {
             $product = Product::find($id);
-            $message = 'Продукт удален';
+            $prod = [];
+            $prod['price'] = $product->price;
+            $prod['curency'] = $product->curency;
+            $message = 'Продукт '.$product->name.' удален';
             $productwithimage = DB::table('products')->where('image', '=', $product->image)->count();
             $product->delete();
             if(!empty($product->image) && $productwithimage == 1)
             {
                 unlink('images/product/'.$product->image);
             }
-           $products=Product::get();
-		return view('product.dashboard',['products'=>$products, 'message' => $message]);
+		return view('product.showdel',['product' => $prod, 'message' => $message]);
         }
         
         public function create()
@@ -71,6 +73,7 @@ class ProductController extends Controller
              $arrdata['manufacturer'] = $request->manufacturer;
              $arrdata['category'] = $request->category;
              $message = 'Цена должна быть числом';
+			 $categories=Category::all();
              return view('product.create',['categories'=>$categories, 'message' => $message, 'arrdata' => $arrdata]);
              //$str = str_replace(",", ".", $request->price);
              return ;
@@ -88,7 +91,7 @@ class ProductController extends Controller
 				$str = str_replace(",", ".", $request->price);
                                 $all['price'] = $str;
                                 $all['image']=$f_name;// меняем значение preview на нашу ссылку, иначе в базу попадет что-то вроде /tmp/sdfWEsf.tmp
-				Product::create($all); //сохраняем массив в базу
+				$model = Product::create($all); //сохраняем массив в базу
                                $message = 'Продукт '.$request->name.' добавлен';
 				}
 				else
@@ -96,12 +99,13 @@ class ProductController extends Controller
                                    $all=$request->all();
                                    $all['price'] = $str;
                                  $message = 'Продукт '.$request->name.' добавлен';
-				Product::create($all); // если картинка не передана, то сохраняем запрос, как есть.
+				$model = Product::create($all); // если картинка не передана, то сохраняем запрос, как есть.
 					
 			}
-		$products=Product::get();
+                        $id = $model->id;
+                        $product = Product::find($id);
                 
-		return view('product.dashboard',['products'=>$products, 'message' => $message]);
+		return view('product.productadmin',['product'=>$product, 'message' => $message]);
 	}
         
      public function update(ProductRequest $request, $id)
