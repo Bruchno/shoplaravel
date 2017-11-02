@@ -1,0 +1,62 @@
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+}
+.divselect{
+    width: 300px; 
+    background:#395015; 
+    border: 1px solid #5d7c29; 
+    width: 300px;
+    padding: 4px;
+    color: #FFFFFF; margin: 5px;
+    display: inline;
+}
+ .pagination li{
+    list-style-type: none;
+    float: left;
+    margin-left: 10px;
+}
+.pagination li div {
+    color: #e79e05;
+    font: 18px serif;
+    margin: auto;
+}
+ #editor{
+    font-family: tahoma; 
+    color: #EDEFF2;
+    font-size: 18px; 
+    margin-bottom: 20px; 
+    background: #395015; 
+    border: 1px solid #5d7c29; 
+}
+.price {
+    display: inline;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.pagination li a {
+    color: #20895e;
+    text-decoration: textdecoration;
+}
+.page{
+    width: auto;
+    height: 23px;
+    background: #c3e3b5;
+    border: 1px solid #20895e;
+    border-radius: 2px;
+    color: #20895e;
+    padding: 3px;
+}
+.selectdiv{
+    font-family: tahoma; 
+    font-size: 16px; 
+    margin-bottom: 10px; 
+    color: #ffe; 
+    background: #395015; 
+    border: 1px solid #5d7c29;
+}
