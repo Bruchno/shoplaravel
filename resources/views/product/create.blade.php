@@ -57,16 +57,16 @@ $i++;
 <input type="text" name="price" value = "{{$arrdata['price']}}">
 <select name="curency" class="selectdiv" >
     @if($arrdata['curency'] == 'ГРН')
-      <option value="$arrdata['curency']" selected>&#8372;</option>
-      @else <option value="{{ $arrdata['curency'] }}">&#8372;</option>
+      <option value='ГРН' selected>&#8372;</option>
+      @else <option value='ГРН'>&#8372;</option>
      @endif
     @if($arrdata['curency'] == 'USD')
-      <option value="{{ $arrdata['curency'] }}" selected>&#36;</option>
-      @else <option value="{{ $arrdata['curency'] }}">&#36;</option>
+      <option value='USD' selected>&#36;</option>
+      @else <option value='USD'>&#36;</option>
      @endif 
     @if($arrdata['curency'] == 'EURO')
-      <option value="{{ $arrdata['curency'] }}" selected>&euro;</option>
-      @else <option value="{{ $arrdata['curency'] }}">&euro;</option>
+      <option value='EURO' selected>&euro;</option>
+      @else <option value='EURO'>&euro;</option>
      @endif
 </select></div><br>
 <br>
