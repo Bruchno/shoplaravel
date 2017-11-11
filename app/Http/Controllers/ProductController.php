@@ -61,51 +61,22 @@ class ProductController extends Controller
     
      public function store(ProductRequest $request)
     {
-         if(!preg_match('/^\d+[.,]?\d+$/', $request->price))
+         $arrdata = Product::getprice($request);
+         if(!empty($arrdata))
          {
-             $arrdata = [];
-             $arrdata['name'] = $request->name;
-             $arrdata['sort'] = $request->sort;
-             $arrdata['color'] = $request->color;
-             $arrdata['price'] = $request->price;
-             $arrdata['curency'] = $request->curency;
-             $arrdata['description'] = $request->description;
-             $arrdata['manufacturer'] = $request->manufacturer;
-             $arrdata['category'] = $request->category;
              $message = 'Цена должна быть числом';
-			 $categories=Category::all();
+	     $categories=Category::all();
              return view('product.create',['categories'=>$categories, 'message' => $message, 'arrdata' => $arrdata]);
-             //$str = str_replace(",", ".", $request->price);
-             return ;
          }
-                 $str = str_replace(",", ".", $request->price);
-                
-		if($request->hasFile('image')) //Проверяем была ли передана картинка.
-		{
-		
-			$patch="images/product/"; 
-                        
-				$f_name=$request->file('image')->getClientOriginalName();//определяем имя файла
-				$request->file('image')->move($patch, $f_name); //перемещаем файл в папку с оригинальным именем
-				$all=$request->all(); //в переменой $all будет массив, который содержит все введенные данные в форме
-				$str = str_replace(",", ".", $request->price);
-                                $all['price'] = $str;
-                                $all['image']=$f_name;// меняем значение preview на нашу ссылку, иначе в базу попадет что-то вроде /tmp/sdfWEsf.tmp
-				$model = Product::create($all); //сохраняем массив в базу
-                               $message = 'Продукт '.$request->name.' добавлен';
-				}
-				else
-				{
-                                   $all=$request->all();
-                                   $all['price'] = $str;
-                                 $message = 'Продукт '.$request->name.' добавлен';
-				$model = Product::create($all); // если картинка не передана, то сохраняем запрос, как есть.
-					
-			}
-                        $id = $model->id;
-                        $product = Product::find($id);
-                
-		return view('product.productadmin',['product'=>$product, 'message' => $message]);
+                $str = str_replace(",", ".", $request->price);
+                $all=$request->all(); 
+                $all['price'] = $str;
+                $all['image']=Product::imgupload($request); 
+                $model = Product::create($all); //сохраняем массив в базу
+                $message = 'Продукт '.$request->name.' добавлен';
+                $id = $model->id;
+                $product = Product::find($id);
+                return view('product.productadmin',['product'=>$product, 'message' => $message]);
 	}
         
      public function update(ProductRequest $request, $id)
