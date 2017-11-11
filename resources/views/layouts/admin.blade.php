@@ -74,7 +74,7 @@ function clearText(field)
                 </li>
                 <li><a href="/categories">Категории</a>
                 <ul>
-                        <li><a href="/categories/add">Добавить</a></li>
+                        <li><a href="/categories/create">Добавить</a></li>
                         <li><a href="/categories">Редактировать</a></li>
                 </ul></li>
                 

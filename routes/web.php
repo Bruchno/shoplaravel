@@ -11,13 +11,14 @@
 |
 */
 Route::get('/', 'ProductController@index');
+Route::resource('categories', 'CategoriesController');
 
-Route::get('categories', 'CategoriesController@index');
-Route::get('categories/add', 'CategoriesController@create');
-Route::post('categories/add', 'CategoriesController@store')->name('addCategories');
-Route::get('categories/edit/{id}', 'CategoriesController@edit');
-Route::put('categories/update/{id}', 'CategoriesController@update');
-Route::delete('categories/destroy/{id}', 'CategoriesController@destroy');
+//Route::get('categories', 'CategoriesController@index');
+//Route::get('categories/add', 'CategoriesController@create');
+//Route::post('categories/add', 'CategoriesController@store')->name('addCategories');
+//Route::get('categories/edit/{id}', 'CategoriesController@edit');
+//Route::put('categories/update/{id}', 'CategoriesController@update');
+//Route::delete('categories/destroy/{id}', 'CategoriesController@destroy');
 
 Route::get('products', 'ProductController@admin')->name('products');
 Route::get('product/add', 'ProductController@create');

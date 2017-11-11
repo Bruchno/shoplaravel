@@ -2,11 +2,12 @@
 @section('content')
 
 <h2>Создание новой категории</h2>
-<form method="POST" action="{{route('addCategories')}}"/>
-Название категории<br>
-<input type="text" name="title"/><br>
-<input type="hidden" name="_token" value="{{csrf_token()}}"/>
-<input type="submit" value="Сохранить">
+{!! Form::open(['route' => 'categories.store']) !!}
+{!! Form::token() !!}
+{!! Form::label('title', 'Название категории') !!}<br>
+{!! Form::text('title') !!}<br>
+{!! Form::submit("Сохранить") !!}
+{!!  Form::close() !!}
 
 @if(Session::has('message'))
 {{Session::get('message')}}

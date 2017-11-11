@@ -14,8 +14,8 @@
 @foreach ($categories as $category)
 <tr><td>{{ $category->id }}</td>
 <td>{{$category->title}}</td>
-<td> <a href="/categories/edit/{{$category->id}}">Изменить</a></td>
-<td> <form method="POST" action="/categories/destroy/{{$category->id}}">
+<td> <a href="/categories/{{$category->id}}/edit">Изменить</a></td>
+<td> <form method="POST" action="/categories/{{$category->id}}">
 <input type="hidden" name="_method" value="delete"/>
 <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 <input type="submit" value="Удалить"/>
