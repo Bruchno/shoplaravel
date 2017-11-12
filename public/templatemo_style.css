@@ -114,8 +114,8 @@ cite span { font-weight: 400; color: #333; }
 .col13 { width: 210px }
 .col23 { width: 450px }
 
-#site_title { padding: 20px 0 }
-#site_title a { display: block; font-size: 12px; font-family: Georgia, "Times New Roman", Times, serif; width: 280px; height: 105px; color: #acacac; text-indent: -10000px; background: url(images/templatemo_logo.png) no-repeat top left }
+#site_title { padding: 20px 0; color: #acacac;  background: url(images/templatemo_logo.png) no-repeat top left}
+#site_title a { display: block; font-size: 22px; font-family: Georgia, "Times New Roman", Times, serif; width: 280px; height: 105px;  }
 
 #templatemo_menu { clear: both; padding: 10px; width: 960px; height: 30px; background: url(images/templatemo_menu.png)}
 

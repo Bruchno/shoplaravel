@@ -1,27 +1,34 @@
 @extends('layouts.admin')
-
+<style>
+    .inputfiles{
+        display: none;
+    }
+</style>
 @section('content')
+@if($message != '')
+    <h3 style="color: beige">{{$message}}</h2>
+@endif
 
+{!! Form::open(['route' => ['products.update', $product->id], 'files' => true, 'method' => 'put']) !!}
 
-
-<form method="POST" action="/product/update/{{$product->id}}" enctype="multipart/form-data">
     <span>Изменить изображение:</span><br/>
-<input type="hidden" name="_method" value="put">
 @if(!empty($product->image))
 <label for="inputfile" id ="output"><img src="/images/product/{{ $product->image }}" /></label>
 @else 
 <label for="inputfile" id ="output"><img src="/images/no_foto.jpg" /></label>
-@endif<input type="file" name="image" id = "inputfile" style="display: none;"><br>
-
+@endif
+<br>
+{!! Form::file('image', ['id' => 'inputfile', 'class' => 'inputfiles']) !!}
 <div class="content_half left form_field">
 Наименование продукта:<br>
-<input type="text" name="name" value="{{ $product->name }}"><br>
+{{ Form::text('name', $product->name) }}
+<br>
 Сорт:<br>
-<input type="text" name="sort" value="{{ $product->sort }}"><br>
+    {{ Form::text('sort', $product->sort) }}<br>
 Цвет:<br>
-<input type="text" name="color" value="{{ $product->color }}"><br>
+    {{ Form::text('color', $product->color) }}<br>
 Цена:<br><div class="price" >
-<input type="text" name="price" value="{{ $product->price }}">
+    {{ Form::text('price', $product->price) }}
 <select name="curency" class="selectdiv">
     @if($product->curency == 'ГРН')
       <option value="{{ $product->curency }}" selected>&#8372;</option>
@@ -38,10 +45,11 @@
 </select></div><br>
 
 Производитель:<br>
-<input type="text" name="manufacturer" value="{{ $product->manufacturer }}"><br>
-Описание:<br></div>
-<textarea id = "editor" cols = "90" rows = "10"  class="selectdiv" 
-          name="description">{{ $product->description }}</textarea><br>
+{{ Form::text('manufacturer', $product->manufacturer) }}
+<br>
+Описание:<br>
+{!! Form::textarea("description", $product->description, ['id' => 'editor', 'cols' => "70", 'rows' => "10"]) !!}
+
 Категория:<br>
 <select name="category" class="selectdiv" >
 @foreach($categories as $category)
@@ -52,10 +60,11 @@
 @endforeach
 </select><br>
 
-<input type="hidden" name="_token" value="{{csrf_token()}}">
-<input type="submit" value="Сохранить" class="btn-success" style="margin-bottom: 10px;">
- 
-</form>
+{{ Form::token() }}
+<div style="margin-bottom: 10px;">
+{!! Form::submit("Сохранить", []) !!}</div>
+ </div>
+{{ Form::close()}}
 
 <script>
    function handleFileSelect(evt) {

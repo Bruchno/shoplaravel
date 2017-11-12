@@ -12,19 +12,9 @@
 */
 Route::get('/', 'ProductController@index');
 Route::resource('categories', 'CategoriesController');
+Route::get('products/admin', 'ProductController@admin');
 
-//Route::get('categories', 'CategoriesController@index');
-//Route::get('categories/add', 'CategoriesController@create');
-//Route::post('categories/add', 'CategoriesController@store')->name('addCategories');
-//Route::get('categories/edit/{id}', 'CategoriesController@edit');
-//Route::put('categories/update/{id}', 'CategoriesController@update');
-//Route::delete('categories/destroy/{id}', 'CategoriesController@destroy');
+Route::resource('products', 'ProductController');
+Route::get('products/admin/{id}', 'ProductController@prodshow');
 
-Route::get('products', 'ProductController@admin')->name('products');
-Route::get('product/add', 'ProductController@create');
-Route::post('product/add', 'ProductController@store')->name('addProduct');
-Route::get('product/redaction/{id}', 'ProductController@edit');
-Route::put('product/update/{id}', 'ProductController@update');
-Route::delete('product/destroy/{id}', 'ProductController@destroy');
-Route::get('product/show/{id}', 'ProductController@show');
-Route::get('product/prodshow/{id}','ProductController@prodshow');
+Route::get('products/category/{id}', 'ProductController@showcategory');

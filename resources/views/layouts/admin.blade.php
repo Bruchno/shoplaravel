@@ -62,14 +62,14 @@ function clearText(field)
 <div id="templatemo_wrapper_h">
 <div id="templatemo_header_wh">
 	<div id="templatemo_header" class="header_home">
-    	<div id="site_title"><a href="">Главная</a></div>
+    	<div id="site_title"><a href="/">Админка</a></div>
         <div id="templatemo_menu" class="ddsmoothmenu">
             <ul>
-                <li><a href="/"class=" selected">Главная</a></li>
+                <li><a href="/" class=" selected">Главная</a></li>
                 
-                <li><a href="/products">Продукты</a>
+                <li><a href="/products/admin">Продукты</a>
                     <ul>
-                        <li><a href="/product/add">Добавить</a></li>
+                        <li><a href="/products/create">Добавить</a></li>
                   	</ul>
                 </li>
                 <li><a href="/categories">Категории</a>

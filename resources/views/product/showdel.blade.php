@@ -7,7 +7,7 @@
 @endif
 
 <br>
-<a href="/products" ><button>Назад к продуктам</button></a>
+<a href="/products/admin" ><button>Назад к продуктам</button></a>
 <div class="content_half left form_field" >
 
 

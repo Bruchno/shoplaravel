@@ -103,6 +103,7 @@ class CategoriesController extends Controller
 		$category=Category::find($id); 
 		$category->delete();
 		$message = "Категория ".$category->title." удалена";
-		return back()->with(['message' => $message]);
+		$categories=Category::all(); //выбираем все категории
+                return view('categories.categories',['categories'=>$categories, 'message' => $message]);
     }
 }

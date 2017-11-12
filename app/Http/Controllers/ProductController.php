@@ -30,8 +30,9 @@ class ProductController extends Controller
         public function edit($id)
         {
             $product = Product::find($id);
+            $message = '';
 	    $categories=Category::all(); // выбираем все категории
-	    return view('product.edit',['product'=>$product,'categories'=>$categories]);
+	    return view('product.edit',['product'=>$product,'categories'=>$categories, 'message' => $message]);
         }
         
         
@@ -81,28 +82,35 @@ class ProductController extends Controller
         
      public function update(ProductRequest $request, $id)
     {
-        //
-		$product = Product::find($id);
-		if($request->hasFile('image')) //Проверяем была ли передана картинка, ведь статья может быть и без картинки.
+        
+         $product = Product::find($id);
+         $arrdata = Product::getprice($request);
+         if(!empty($arrdata))
+         {
+             $message = 'Цена должна быть числом';
+	     $categories=Category::all();
+             return view('product.edit',['product'=>$product,'categories'=>$categories, 'message' => $message]);
+         }
+         $str = str_replace(",", ".", $request->price);
+         $all=$request->all(); 
+         $all['price'] = $str;
+         $all['image']=Product::imgupload($request);
+		if($all['image'] != null) //Проверяем была ли передана картинка, ведь статья может быть и без картинки.
 		{
                    $productwithimage = DB::table('products')->where('image', '=', $product->image)->count();
                    if($productwithimage == 1)
                     {
                         unlink('images/product/'.$product->image);
                     }
-                   $root="images/product/"; // это папка для загрузки картинок
-                   $f_name = $request->file('image')->getClientOriginalName();//определяем имя файла
-                   $request->file('image')->move($root, $f_name); //перемещаем файл в папку с оригинальным именем
-                   $all = $request->all(); //в переменой $all будет массив, который содержит все введенные данные в форме
-                   $all['image']= $f_name;// меняем значение 
+                   
                    $message = 'Продукт '.$request->name.' изменен';
                    $product->update($all);
                    }    else  {
                        $message = 'Продукт '.$request->name.' изменен';
                        $product->update($request->all());
                           }     
-           $products=Product::get();
-          return view('product.dashboard',['products'=>$products, 'message' => $message]);
+          $product = Product::find($id);
+        return view('product.productadmin',['product'=>$product]);
     }  
         
     public function show($id)
@@ -117,4 +125,10 @@ class ProductController extends Controller
         return view('product.productadmin',['product'=>$product]);
     }
     
+    public function showcategory($id)
+    {
+        $category = Category::find($id);
+        $products = DB::table('products')->where('category', '=', $category->title)->paginate(4);
+        return view('product.index',['products'=>$products]);
+    }
 }

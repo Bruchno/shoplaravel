@@ -1,25 +1,30 @@
 @extends('layouts.admin')
-
+<style>
+    .inputfiles{
+        display: none;
+    }
+</style>
 @section('content')
 <h2>Новый продукт</h2>
 
 @if($message != '')
-    <span>{{$message}}</span>
+    <h3 style="color: beige">{{$message}}</h2>
 @endif
+{!! Form::open(['route' => 'products.store', 'files' => true]) !!}
 
-<form method="post" action="{{route('addProduct')}}" enctype="multipart/form-data">
 <h2>Изображение:</h2><br>
 <label for="inputfile" id ="output"><img src="/images/no_foto.jpg" /></label>
-<input type="file" name="image" id = "inputfile" style="display: none;"><br>
-
+{!! Form::file('image', ['id' => 'inputfile', 'class' => 'inputfiles']) !!}
+<br/>
 <div class="content_half left form_field" >
 Наименование продукта:
 @if(empty($arrdata))
-<input type="text" name="name" placeholder="Необходимо заполнить"><br>
+{!! Form::text("name", "Необходимо заполнить") !!}
+<br>
 Сорт:
-<input type="text" name="sort" placeholder="Необходимо заполнить"><br>
+{!! Form::text("sort", "Необходимо заполнить") !!}<br>
 Цвет:
-<input type="text" name="color"><br>
+{!! Form::text("color") !!}<br>
 
 Цена:
 <div class="price">
@@ -30,11 +35,12 @@
 <option value="EURO">&euro;</option>
 </select></div><br>
 Производитель:
-<input type="text" name="manufacturer" ><br>
+{!! Form::text("manufacturer", "Необходимо заполнить") !!}
 Описание:
-<textarea id = "editor" cols = "70" rows = "10" class="mytest"
-          name="description" placeholder="Необходимо заполнить"></textarea><br>
+{!! Form::textarea("description", "Необходимо заполнить", ['id' => 'editor', 'cols' => "70", 'rows' => "10"]) !!}
+<br>
 Категория: 
+
 <select name="category" class="selectdiv" >
     <?php $i = 0;?>
 @foreach($categories as $category)
@@ -47,14 +53,14 @@ $i++;
 </select> 
 
 @else 
-
-<input type="text" name="name" value = "{{$arrdata['name']}}"><br>
+{!! Form::text("name", $arrdata['name']) !!}<br>
 Сорт:
-<input type="text" name="sort" value = "{{$arrdata['sort']}}"><br>
+{{Form::text('sort', $arrdata['sort'])}}<br>
 Цвет:
-<input type="text" name="color" value = "{{$arrdata['color']}}"><br>
+{{Form::text('color', $arrdata['color'])}}
+
 Цена:<br/><div class="price">
-<input type="text" name="price" value = "{{$arrdata['price']}}">
+    {{Form::text('price', $arrdata['price'])}}
 <select name="curency" class="selectdiv" >
     @if($arrdata['curency'] == 'ГРН')
       <option value='ГРН' selected>&#8372;</option>
@@ -71,10 +77,10 @@ $i++;
 </select></div><br>
 <br>
 Производитель:
-<input type="text" name="manufacturer" value = "{{$arrdata['manufacturer']}}"><br>
+{{Form::text('manufacturer', $arrdata['manufacturer'])}}
 Описание:
-<textarea id = "editor" cols = "70" rows = "10" class="mytest"
-          name="description" value = "{{$arrdata['description']}}"></textarea><br>
+{!! Form::textarea("description", $arrdata['description'], ['id' => 'editor', 'cols' => "70", 'rows' => "10"]) !!}
+
 Категория: 
 <select name="category"class="selectdiv"  >
 @foreach($categories as $category)
@@ -85,12 +91,12 @@ $i++;
 @endforeach
 </select>
 @endif
-
-
-<input type="hidden" name="_token" value="{{csrf_token()}}">
+{{ Form::token() }}
 <div style="margin: 30px;">
-    <input type="submit" class="btn btn-primary" value="Сохранить"></div>
+    {{ Form::submit('Сохранить') }}
+    </div>
 </div>
+{!! Form::close() !!}
 </form>
 <script>
    function handleFileSelect(evt) {

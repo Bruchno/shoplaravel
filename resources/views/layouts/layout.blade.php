@@ -57,22 +57,17 @@ function clearText(field)
 <div id="templatemo_wrapper_h">
 <div id="templatemo_header_wh">
 	<div id="templatemo_header" class="header_home">
-    	<div id="site_title"><a href="#">Floral Shop</a></div>
+    	<div id="site_title"><a href="/">Цветы</a></div>
         <div id="templatemo_menu" class="ddsmoothmenu">
             <ul>
                 <li><a href="/" class="selected">Главная</a></li>
                 <li><a href="">О нас</a></li>
                 <li><a href="/">Продукты</a>
-                    <ul>
-                        <li><a href="">Категория 1</a></li>
-                        <li><a href="">SКатегория 2</a></li>
-                        <li><a href="">Категория 3</a></li>
-                        <li><a href="">Категория 4</a></li>
-                  	</ul>
+                    @widget('menu', ['format' => 'navbar'])
                 </li>
                 <li><a href="">Корзина</a></li>
                 <li><a href="">Контакты</a></li>
-                <li><a href="/products">Админка</a></li>
+                <li><a href="/products/admin">Админка</a></li>
             </ul>
             
             <br style="clear: left" />
@@ -108,19 +103,9 @@ function clearText(field)
 <div id="templatemo_main">
 	<div id="sidebar" class="left">
     	<div class="sidebar_box"><span class="bottom"></span>
-            <h3>Categories</h3>   
+            <h3>Категории</h3>   
             <div class="content"> 
-                <ul class="sidebar_list">
-                    <li><a href="#">Nulla odio ipsum</a></li>
-                    <li><a href="#">Suspendisse posuere</a></li>
-                    <li><a href="#">Aliquam euismod</a></li>
-                    <li><a href="#">Curabitur ac mauris</a></li>
-                    <li><a href="#">Mauris nulla tortor</a></li>
-                    <li><a href="#">Nullam ultrices</a></li>
-                    <li><a href="#">Vivamus scelerisque</a></li>
-                    <li><a href="#">Suspendisse posuere</a></li>
-                    <li><a href="#">Quisque vel justo</a></li>
-                </ul>
+                @widget('menu', ['format' => 'sidebar_list'])
             </div>
         </div>
         <div class="sidebar_box"><span class="bottom"></span>

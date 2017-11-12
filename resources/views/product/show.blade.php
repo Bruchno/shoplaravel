@@ -10,8 +10,8 @@
                 <table>
                     <tr>
                         <td width="130">Цена:</td>
-                        <td width="84"><?php echo sprintf("%01.2f", $product->price); ?></td>
-                        <td width="84">{{$product->curency}}</td>
+                        <td width="84"><?php echo sprintf("%01.2f", $product->price); ?>
+                        {{$product->curency}}</td>
                     </tr>
                     <tr>
                         <td>Производитель:</td>
